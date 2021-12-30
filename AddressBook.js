@@ -43,6 +43,58 @@ function addContact(firstName, lastName, address, city, state, zip, phoneNumber,
 
 }
 
+function findContact(firstName, lastName, addressBook) {
+
+    foundContact = null;
+    addressBook.forEach(contact => {
+        if (contact.firstName === firstName) {
+            console.log(" found the first name");
+            if (contact.lastName === lastName) {
+                console.log(" found the last name");
+                foundContact = contact;
+            }
+        }
+    });
+
+    if (foundContact == null) {
+        console.log(" The contact was not found!");
+    }
+
+    return foundContact;
+    
+}
+
+function editContact(addressBook, firstName, lastName, option, newValue) {
+    contact = findContact(firstName, lastName, addressBook);
+
+    if(contact == null) {
+        console.log(" the contact we got was null");
+        return null;
+    }
+
+    if (option === "address") {
+        contact.address = newValue;
+    }
+    else if (option === "city") {
+        contact.city = newValue;
+    }
+    else if (option === "state") {
+        contact.state = newValue;
+    }
+    else if (option === "zip") {
+        contact.zip = newValue;
+    }
+    else if (option === "phone") {
+        contact.phoneNumber = newValue;
+    }
+    else if (option === "email") {
+        contact.email = newValue;
+    }
+
+    return contact;
+
+}
+
 console.log(" the program has started");
 
 nameCheck = new RegExp("^[A-Z][a-z]{2,}$");
@@ -54,5 +106,7 @@ zipCheck = new RegExp("^[0-9]{3,6}$")
 addressBook = [];
 
 addContact("David", "Alapat", "india", "thrissur", "kerala", 1234, "91 1212341234", "hi@gmail.com", addressBook);
+console.log(addressBook);
 
+editContact(addressBook, "David", "Alapat", "address", "oman");
 console.log(addressBook);
