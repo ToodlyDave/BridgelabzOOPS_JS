@@ -20,7 +20,7 @@ class Contact {
     }
 }
 
-function addContact(firstName, lastName, address, city, state, zip, phoneNumber, email) {
+function addContact(firstName, lastName, address, city, state, zip, phoneNumber, email, addressBook) {
     check = true;
 
     check = check && nameCheck.test(firstName);
@@ -34,6 +34,7 @@ function addContact(firstName, lastName, address, city, state, zip, phoneNumber,
 
     if(check == true) {
         newContact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
+        addressBook.push(newContact);
         console.log(" contact entered successfully");
     }
     else {
@@ -50,4 +51,8 @@ emailCheck = new RegExp("^[\\w+-]+(\\.[\\w-]+)*@[^_\\W]+(\\.[^_\\W]+)?(?=(\\.[^_
 phoneCheck = new RegExp("^[0-9]{1,3}[\\s][0-9]{10}$");
 zipCheck = new RegExp("^[0-9]{3,6}$")
 
-addContact("David", "Alapat", "india", "thrissur", "kerala", 1234, "91 1212341234", "hi@gmail.com");
+addressBook = [];
+
+addContact("David", "Alapat", "india", "thrissur", "kerala", 1234, "91 1212341234", "hi@gmail.com", addressBook);
+
+console.log(addressBook);
