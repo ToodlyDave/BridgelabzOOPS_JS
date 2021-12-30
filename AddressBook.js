@@ -137,6 +137,17 @@ function searchCityState(addressBook, option, cityState) {
     }
 }
 
+function viewCityState(addressBook, option, cityState) {
+    
+    if (option === "city") {
+        return addressBook.filter( contact => contact.city === cityState);
+    }
+    
+    else {
+        return addressBook.filter( contact => contact.state === cityState);
+    }
+}
+
 console.log(" the program has started\n");
 
 nameCheck = new RegExp("^[A-Z][a-z]{2,}$");
@@ -162,3 +173,5 @@ console.log(" Count of contacts = ", count(addressBook) );
 
 console.log(searchCityState(addressBook, "city", "thrissur"));
 console.log(searchCityState(addressBook, "state", "California"));
+
+console.log(viewCityState(addressBook, "state", "California"));
