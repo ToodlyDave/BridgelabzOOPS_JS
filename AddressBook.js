@@ -48,9 +48,7 @@ function findContact(firstName, lastName, addressBook) {
     foundContact = null;
     addressBook.forEach(contact => {
         if (contact.firstName === firstName) {
-            console.log(" found the first name");
             if (contact.lastName === lastName) {
-                console.log(" found the last name");
                 foundContact = contact;
             }
         }
@@ -95,10 +93,23 @@ function editContact(addressBook, firstName, lastName, option, newValue) {
 
 }
 
+function deleteContact(addressBook, firstName, lastName) {
+    contact = findContact(firstName, lastName, addressBook);
+    index = addressBook.indexOf(contact);
+
+    if (index > -1) {
+        addressBook.splice(index, 1);
+        console.log(" Deleted element");
+    }
+
+    return addressBook;
+    
+}
+
 console.log(" the program has started");
 
 nameCheck = new RegExp("^[A-Z][a-z]{2,}$");
-addressCityStateCheck = new RegExp("^[a-zA-Z]{4,}$");
+addressCityStateCheck = new RegExp("^[a-z A-Z]{4,}$");
 emailCheck = new RegExp("^[\\w+-]+(\\.[\\w-]+)*@[^_\\W]+(\\.[^_\\W]+)?(?=(\\.[^_\\W]{3,}$|\\.[a-zA-Z]{2}$)).*$");
 phoneCheck = new RegExp("^[0-9]{1,3}[\\s][0-9]{10}$");
 zipCheck = new RegExp("^[0-9]{3,6}$")
@@ -106,7 +117,11 @@ zipCheck = new RegExp("^[0-9]{3,6}$")
 addressBook = [];
 
 addContact("David", "Alapat", "india", "thrissur", "kerala", 1234, "91 1212341234", "hi@gmail.com", addressBook);
+addContact("John", "Doe", "United States", "San Fransisco", "California", 1234, "91 1234567899", "hey@gmail.com", addressBook);
 console.log(addressBook);
 
 editContact(addressBook, "David", "Alapat", "address", "oman");
+console.log(addressBook);
+
+addressBook = deleteContact(addressBook, "David", "Alapat");
 console.log(addressBook);
