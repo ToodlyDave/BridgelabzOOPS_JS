@@ -129,11 +129,11 @@ function count(addressBook) {
 function searchCityState(addressBook, option, cityState) {
     
     if (option === "city") {
-        return addressBook.filter( contact => contact.city === cityState);
+        return addressBook.filter( contact => contact.city === cityState).map(contact => contact.firstName);
     }
     
     else {
-        return addressBook.filter( contact => contact.state === cityState);
+        return addressBook.filter( contact => contact.state === cityState).map(contact => contact.firstName);
     }
 }
 
