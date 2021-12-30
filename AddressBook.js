@@ -106,6 +106,15 @@ function deleteContact(addressBook, firstName, lastName) {
     
 }
 
+function count(addressBook) {
+    
+    addressBook.reduce( () => { 
+        countContacts++;
+    }, countContacts = 0);
+    
+    return countContacts;
+}
+
 console.log(" the program has started");
 
 nameCheck = new RegExp("^[A-Z][a-z]{2,}$");
@@ -122,6 +131,8 @@ console.log(addressBook);
 
 editContact(addressBook, "David", "Alapat", "address", "oman");
 console.log(addressBook);
+console.log(" Count of contacts = ", count(addressBook) );
 
 addressBook = deleteContact(addressBook, "David", "Alapat");
 console.log(addressBook);
+console.log(" Count of contacts = ", count(addressBook) );
