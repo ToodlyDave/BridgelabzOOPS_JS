@@ -21,8 +21,17 @@ class Contact {
 }
 
 function addContact(firstName, lastName, address, city, state, zip, phoneNumber, email, addressBook) {
-    check = true;
+    
+    newBook = addressBook.filter(contact => contact.firstName === firstName && contact.lastName === lastName);
 
+    newBook.reduce( () => countContacts++, countContacts = 0);
+
+    if (countContacts > 0) {
+        console.log(" ERROR: Duplicate entry! Not entering into address book");
+        return addressBook;
+    }
+
+    check = true;
     check = check && nameCheck.test(firstName);
     check = check && nameCheck.test(lastName);
     check = check && addressCityStateCheck.test(address);
@@ -35,11 +44,13 @@ function addContact(firstName, lastName, address, city, state, zip, phoneNumber,
     if(check == true) {
         newContact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
         addressBook.push(newContact);
-        console.log(" contact entered successfully");
+        console.log(" Contact entered successfully");
     }
     else {
         console.log(" Please enter valid details!");
     }
+
+    return addressBook;
 
 }
 
@@ -115,7 +126,7 @@ function count(addressBook) {
     return countContacts;
 }
 
-console.log(" the program has started");
+console.log(" the program has started\n");
 
 nameCheck = new RegExp("^[A-Z][a-z]{2,}$");
 addressCityStateCheck = new RegExp("^[a-z A-Z]{4,}$");
@@ -125,13 +136,14 @@ zipCheck = new RegExp("^[0-9]{3,6}$")
 
 addressBook = [];
 
-addContact("David", "Alapat", "india", "thrissur", "kerala", 1234, "91 1212341234", "hi@gmail.com", addressBook);
-addContact("John", "Doe", "United States", "San Fransisco", "California", 1234, "91 1234567899", "hey@gmail.com", addressBook);
+addressBook = addContact("David", "Alapat", "india", "thrissur", "kerala", 1234, "91 1212341234", "hi@gmail.com", addressBook);
+addressBook = addContact("David", "Alapat", "india", "thrissur", "kerala", 1234, "91 1212341234", "hi@gmail.com", addressBook);
+addressBook = addContact("John", "Doe", "United States", "San Fransisco", "California", 1234, "91 1234567899", "hey@gmail.com", addressBook);
 console.log(addressBook);
 
 editContact(addressBook, "David", "Alapat", "address", "oman");
 console.log(addressBook);
-console.log(" Count of contacts = ", count(addressBook) );
+console.log("\n Count of contacts = ", count(addressBook) );
 
 addressBook = deleteContact(addressBook, "David", "Alapat");
 console.log(addressBook);
