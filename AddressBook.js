@@ -174,6 +174,22 @@ function countCityState(addressBook, option) {
     return cityState
 }
 
+function sortByName(addressBook) {
+    return addressBook.sort( (contact1, contact2) => {
+        if (contact1.firstName < contact2.firstName) {
+            return -1;
+        }
+
+        else if (contact1.firstName > contact2.firstName) {
+            return 1;
+        }
+
+        else {
+            return 0;
+        }
+    });
+}
+
 console.log(" the program has started\n");
 
 nameCheck = new RegExp("^[A-Z][a-z]{2,}$");
@@ -184,10 +200,12 @@ zipCheck = new RegExp("^[0-9]{3,6}$")
 
 addressBook = [];
 
-addressBook = addContact("David", "Alapat", "india", "thrissur", "kerala", 1234, "91 1212341234", "hi@gmail.com", addressBook);
-addressBook = addContact("David", "Alapat", "india", "thrissur", "kerala", 1234, "91 1212341234", "hi@gmail.com", addressBook);
 addressBook = addContact("John", "Doe", "United States", "San Fransisco", "California", 1234, "91 1234567899", "hey@gmail.com", addressBook);
+addressBook = addContact("David", "Alapat", "india", "thrissur", "kerala", 1234, "91 1212341234", "hi@gmail.com", addressBook);
+addressBook = addContact("David", "Alapat", "india", "thrissur", "kerala", 1234, "91 1212341234", "hi@gmail.com", addressBook);
 console.log(addressBook);
+
+console.log(sortByName(addressBook));
 
 console.log(countCityState(addressBook, "city"));
 console.log(countCityState(addressBook, "state"));
