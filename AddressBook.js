@@ -148,6 +148,32 @@ function viewCityState(addressBook, option, cityState) {
     }
 }
 
+function countCityState(addressBook, option) {
+    
+    cityState = new Map();
+
+    addressBook.forEach( (contact) => {
+        if (option === "city") {
+            if (cityState.get(contact.city) == null) {
+                cityState.set(contact.city, 1);
+            }
+            else {
+                cityState.set(contact.city, contact.get(cityState) + 1);
+            }
+        }
+        else {
+            if (cityState.get(contact.state) == null) {
+                cityState.set(contact.state, 1);
+            }
+            else {
+                cityState.set(contact.state, contact.get(cityState) + 1);
+            }
+        }
+    });
+
+    return cityState
+}
+
 console.log(" the program has started\n");
 
 nameCheck = new RegExp("^[A-Z][a-z]{2,}$");
@@ -162,6 +188,9 @@ addressBook = addContact("David", "Alapat", "india", "thrissur", "kerala", 1234,
 addressBook = addContact("David", "Alapat", "india", "thrissur", "kerala", 1234, "91 1212341234", "hi@gmail.com", addressBook);
 addressBook = addContact("John", "Doe", "United States", "San Fransisco", "California", 1234, "91 1234567899", "hey@gmail.com", addressBook);
 console.log(addressBook);
+
+console.log(countCityState(addressBook, "city"));
+console.log(countCityState(addressBook, "state"));
 
 editContact(addressBook, "David", "Alapat", "address", "oman");
 console.log(addressBook);
